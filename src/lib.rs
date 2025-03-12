@@ -1,12 +1,13 @@
-extern crate zyre_sys;
 #[macro_use]
 extern crate lazy_static;
+extern crate fk_zyre_sys;
 
 use std::collections::HashMap;
 use std::convert::TryInto;
 use std::ffi::{ CStr, CString };
 use std::fmt;
 use std::result;
+use fk_zyre_sys as zyre_sys;
 use zyre_sys::{ zmsg_t, zyre_t };
 
 pub type Result<T> = result::Result<T, Error>;
@@ -158,10 +159,12 @@ impl Drop for Zyre {
 }
 
 #[repr(u8)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum EventType {
     // Control
     ENTER,
+    EVASIVE,
+    SILENT,
     EXIT,
     JOIN,
     LEAVE,
@@ -169,15 +172,11 @@ pub enum EventType {
     WHISPER,
 }
 
-impl fmt::Debug for EventType {
-    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-        write!(formatter, "{:?}", self)
-    }
-}
-
 lazy_static! {
     static ref EVENT_MAP: HashMap<&'static str, EventType> = vec![
         ("ENTER", EventType::ENTER),
+        ("EVASIVE", EventType::EVASIVE),
+        ("SILENT", EventType::SILENT),
         ("EXIT", EventType::EXIT),
         ("JOIN", EventType::JOIN),
         ("LEAVE", EventType::LEAVE),

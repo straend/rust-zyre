@@ -1,14 +1,15 @@
 [package]
-name = "zyre"
-version = "0.2.0"
+name = "fk-zyre"
+version = "0.2.1"
+edition = "2024"
 description = "High-level abstraction around the Zyre library."
-authors = ["Schoonology <michael.r.schoonmaker@gmail.com>"]
-repository = "https://github.com/Schoonology/rust-zyre"
+authors = ["Schoonology <michael.r.schoonmaker@gmail.com>", "Tomas FS <tomas@fik1.net>"]
+repository = "https://github.com/straend/rust-zyre"
 keywords = ["zeromq", "services", "discovery", "network"]
 categories = ["api-bindings"]
 readme = "README.md"
 license = "MIT"
 
 [dependencies]
-zyre-sys = { version = "0.1.0", path = "zyre-sys" }
-lazy_static = "1.4.0"
+fk-zyre-sys = "0.1.1"
+lazy_static = "1.5.0"
